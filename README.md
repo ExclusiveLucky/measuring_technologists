@@ -28,7 +28,7 @@
     Type=forking
     User=username
     WorkingDirectory=/username/tcpserver
-    ExecStart=/usr/bin/python3 /username/tcpserver/server.py
+    ExecStart=/usr/bin/python3 /username/tcpserver/server_v*.py
     RestartSec=10
     Restart=always
     
