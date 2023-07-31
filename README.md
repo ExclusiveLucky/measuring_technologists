@@ -81,7 +81,7 @@
 
 
 # Запуск тестов:
-  pytest.exe t_config.py
-  pytest.exe t_service.py
-  pytest.exe t_math.py
+    pytest.exe t_config.py
+    pytest.exe t_service.py
+    pytest.exe t_math.py
 
