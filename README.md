@@ -8,50 +8,48 @@
   Класс TCP предназначен для реализации сетевого взаимодействия по протоколу TCP/IP.
 
 Атрибуты класса:
-- host: строка, адрес хоста, на котором будет запущен сервер;
-- port: целое число, номер порта, на котором будет запущен сервер;
-- server: объект сокета сервера, создаваемый при инициализации класса.
+    - host: строка, адрес хоста, на котором будет запущен сервер;
+    - port: целое число, номер порта, на котором будет запущен сервер;
+    - server: объект сокета сервера, создаваемый при инициализации класса.
 
 Методы класса:
-- __init__(self, host: str, port: int): конструктор класса, принимает на вход параметры:
-  - host: строка, адрес хоста, на котором будет запущен сервер;
-  - port: целое число, номер порта, на котором будет запущен сервер.
-- socket_listen(self): метод, который создает сокет сервера и начинает слушать входящие соединения.
-- socket_request(self, client_socket: socket): метод, который принимает запрос от клиента и возвращает его в виде словаря. Принимает на вход параметры:
-  - client_socket: объект сокета клиента.
-- socket_response(self, client_socket: socket, data :dict): метод, который отправляет ответ клиенту. Принимает на вход параметры:
-  - client_socket: объект сокета клиента;
-  - data: словарь с данными ответа.
+    - __init__(self, host: str, port: int): конструктор класса, принимает на вход параметры:
+    - host: строка, адрес хоста, на котором будет запущен сервер;
+    - port: целое число, номер порта, на котором будет запущен сервер.
+    - socket_listen(self): метод, который создает сокет сервера и начинает слушать входящие соединения.
+    - socket_request(self, client_socket: socket): метод, который принимает запрос от клиента и возвращает его в виде словаря. Принимает на вход параметры:
+    - client_socket: объект сокета клиента.
+    - socket_response(self, client_socket: socket, data :dict): метод, который отправляет ответ клиенту. Принимает на вход параметры:
+    - client_socket: объект сокета клиента;
+    - data: словарь с данными ответа.
 
 Методы socket_request и socket_response используют формат JSON для передачи данных между клиентом и сервером.
 
 Пример использования класса TCP:
 
-import socket
-import json
-from TCP import TCP
-
-class MyServer(TCP):
-    def __init__(self, host, port):
-        super().__init__(host, port)
-
-    def handle_request(self, request):
-        # Обработка запроса
-        response = {"Header": "response", "Request": {"Status": "ok"}}
-        return response
-
-if __name__ == "__main__":
-    server = MyServer("localhost", 8888)
-    server.socket_listen()
-    while True:
-        client_socket, address = server.server.accept()
-        success, request = server.socket_request(client_socket)
-        if success:
-            response = server.handle_request(request)
-            server.socket_response(client_socket, response)
-        client_socket.close()
-
-"""
+    import socket
+    import json
+    from TCP import TCP
+    
+    class MyServer(TCP):
+        def __init__(self, host, port):
+            super().__init__(host, port)
+    
+        def handle_request(self, request):
+            # Обработка запроса
+            response = {"Header": "response", "Request": {"Status": "ok"}}
+            return response
+    
+    if __name__ == "__main__":
+        server = MyServer("localhost", 8888)
+        server.socket_listen()
+        while True:
+            client_socket, address = server.server.accept()
+            success, request = server.socket_request(client_socket)
+            if success:
+                response = server.handle_request(request)
+                server.socket_response(client_socket, response)
+            client_socket.close()
 
 # Сводная таблица методов класса TCP
 | Метод                | Входные параметры                  | Выходные параметры      | Описание                                                                                                                                                             |
