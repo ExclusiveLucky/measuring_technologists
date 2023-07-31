@@ -5,51 +5,7 @@
   Сервер принимает задачи в виде набора `Parquet` данных и набора `python` функций для исполнения как объект `Dask`. После получения задачи, сервер выполняет функции на наборе данных из `Parquet` файла при помощи `Dask` библиотеки и возвращает результат клиенту.
   
 # `class TCP` предназначен для реализации сетевого взаимодействия по протоколу TCP.
-Методы:
 
-    __init__(self, host: str, port: int) -> None:
-      host :str строка, адрес хоста, на котором будет запущен сервер.
-      port :int целое число, номер порта, на котором будет запущен сервер.
-      
-      
-    socket_listen(self) -> None: метод, который создает сокет сервера и начинает слушать входящие соединения.
-    
-    socket_request(self, client_socket: socket) -> Any: метод, который принимает запрос от клиента и возвращает его в виде словаря.
-      client_socket :socket объект сокета клиента. 
-      
-    socket_response(self, client_socket: socket, data: dict) -> None: метод, который отправляет ответ клиенту.
-      client_socket :socket объект сокета клиента.
-      data :dict словарь с данными ответа.
-
-Методы `socket_request` и `socket_response` используют формат `JSON` для передачи данных между клиентом и сервером.
-
-# Пример использования класса TCP:
-
-    import socket
-    import json
-    from TCP import TCP
-    
-    class MyServer(TCP):
-        def __init__(self, host, port):
-            super().__init__(host, port)
-    
-        def handle_request(self, request):
-            # Обработка запроса
-            response = {"Header": "response", "Request": {"Status": "ok"}}
-            return response
-    
-    if __name__ == "__main__":
-        server = MyServer("localhost", 8888)
-        server.socket_listen()
-        while True:
-            client_socket, address = server.server.accept()
-            success, request = server.socket_request(client_socket)
-            if success:
-                response = server.handle_request(request)
-                server.socket_response(client_socket, response)
-            client_socket.close()
-
-# Сводная таблица методов класса TCP
 | Метод                | Входные параметры                  | Выходные параметры      | Описание                                                                                                                                                    |
 |----------------------|----------------------------------|--------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | __init__(self, host, port) | host: str, port: int          | -                        | Конструктор класса. Создает объект сокета сервера.                                                                                                                  |
