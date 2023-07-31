@@ -25,4 +25,3 @@
 # Запуск тестов:
   pytest.exe test_name.py
 
-https://raw.githubusercontent.com/Platane/snk/output/github-contribution-grid-snake.gif
