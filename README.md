@@ -11,23 +11,22 @@
   4)	`RestartSec` – Укажите таймаут перезагрузки сервера (в секундах).
 
 
-Пример содержимого `tcp_server.service` файла:
-
-# [Unit]
-# Description=TCP SERVER
-# After=syslog.target
-# After=network.target
-# 
-# [Service]
-# Type=forking
-# User=username
-# WorkingDirectory=/username/tcpserver
-# ExecStart=/usr/bin/python3 /username/tcpserver/server.py
-# RestartSec=10
-# Restart=always
-# 
-# [Install]
-# WantedBy=multi-user.target
+# Пример содержимого `tcp_server.service` файла:
+    [Unit]
+    Description=TCP SERVER
+    After=syslog.target
+    After=network.target
+    
+    [Service]
+    Type=forking
+    User=username
+    WorkingDirectory=/username/tcpserver
+    ExecStart=/usr/bin/python3 /username/tcpserver/server.py
+    RestartSec=10
+    Restart=always
+    
+    [Install]
+    WantedBy=multi-user.target
 
 
 
