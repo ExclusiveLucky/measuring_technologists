@@ -1,7 +1,6 @@
 # measuring_technologists
 
 # Примеры TCP запросов:
-# Сервисные:
   # Статус сервера.
     {"Header":"Info",   
     "Request":"Status"} 
